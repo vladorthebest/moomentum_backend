@@ -4,7 +4,7 @@ from rest_framework import permissions
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from .serializer import LoginSerializer
 from django.contrib.auth import login
-
+from django.contrib.auth.models import User
 
 # Login user
 class LoginView(APIView):
@@ -18,3 +18,14 @@ class LoginView(APIView):
         user = serializer.validated_data['user']
         login(request, user)
         return Response({'user': user.id})
+    
+class PingView(APIView):
+    permission_classes = (permissions.AllowAny, )
+    # authentication_classes = [BasicAuthentication, SessionAuthentication, ]
+
+    def get(self, request):
+        isAuth = request.user.id
+        
+        if isAuth:
+            return Response({'userID': isAuth})
+        return Response({'userID': 0})

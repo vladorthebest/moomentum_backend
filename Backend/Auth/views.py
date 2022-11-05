@@ -2,9 +2,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from .serializer import LoginSerializer
+from .serializer import LoginSerializer, RegisterSerializer
 from django.contrib.auth import login
 from django.contrib.auth.models import User
+from rest_framework import generics
 
 # Login user
 class LoginView(APIView):
@@ -29,3 +30,8 @@ class PingView(APIView):
         if isAuth:
             return Response({'userID': isAuth})
         return Response({'userID': 0})
+    
+class RegisterView(generics.CreateAPIView):
+    permission_classes = (permissions.AllowAny, )
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer

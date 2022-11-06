@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from .serializer import LoginSerializer, RegisterSerializer
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from rest_framework import generics
 
@@ -22,7 +22,6 @@ class LoginView(APIView):
     
 class PingView(APIView):
     permission_classes = (permissions.AllowAny, )
-    # authentication_classes = [BasicAuthentication, SessionAuthentication, ]
 
     def get(self, request):
         isAuth = request.user.id
@@ -35,3 +34,9 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny, )
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+
+class LogoutView(APIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    def get(self, request):
+        logout(request)
+        return Response({'result': 1})

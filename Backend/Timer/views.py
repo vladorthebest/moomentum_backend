@@ -8,6 +8,18 @@ from .serializers import ActivitySerializer
 from .models import Activity
 
 
+class CheckActivity(generics.RetrieveAPIView):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        try:
+            return self.queryset.get(user=self.request.user.id, activity_status=True)
+        except ObjectDoesNotExist:
+            return False
+
+
 class CreateActivity(generics.GenericAPIView):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer

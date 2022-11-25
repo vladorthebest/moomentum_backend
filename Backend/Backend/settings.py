@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
+=======
+    'rest_framework',
+    'corsheaders',
+    'Timer'
+>>>>>>> f12554c (Create urls.py for Timer app)
 ]
 
 MIDDLEWARE = [

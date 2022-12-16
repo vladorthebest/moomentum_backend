@@ -13,6 +13,7 @@ class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
         fields = '__all__'
+        read_only_fields = ('duration', 'activity_status')
     
     def create(self, validated_data):
         return Activity.objects.create(**validated_data)

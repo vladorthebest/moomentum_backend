@@ -1,5 +1,6 @@
 from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework import generics, viewsets
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -8,7 +9,7 @@ from .serializers import ActivitySerializer
 from .models import Activity
 
 
-class CheckActivity(generics.RetrieveAPIView):
+class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
     permission_classes = [IsAuthenticated]
@@ -19,19 +20,7 @@ class CheckActivity(generics.RetrieveAPIView):
         except ObjectDoesNotExist:
             return False
 
-
-class CreateActivity(generics.GenericAPIView):
-    queryset = Activity.objects.all()
-    serializer_class = ActivitySerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_object(self):
-        try:
-            return self.queryset.get(user=self.request.user.id, activity_status=True)
-        except ObjectDoesNotExist:
-            return False
-
-    def post(self, request):
+    def create(self, request):
         instance = self.get_object()
         if instance:
             # Update instance

@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.ProfileAPI.as_view({'get': 'retrieve'})),
+    path('', views.ProfileAPI.as_view({'get': 'retrieve', 'put': 'update'})),
 ]

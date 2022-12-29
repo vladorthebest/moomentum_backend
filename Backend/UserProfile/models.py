@@ -7,7 +7,9 @@ from django.db.models.signals import post_save
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    
+    lvl = models.IntegerField(default=1)
+    exp = models.IntegerField(default=0)
+
     def __str__(self):
         return self.user.username
 

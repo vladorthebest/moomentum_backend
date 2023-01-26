@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'Timer',
     'Auth',
-    'UserProfile'
+    'UserProfile',
+    'LVL'
 ]
 
 MIDDLEWARE = [

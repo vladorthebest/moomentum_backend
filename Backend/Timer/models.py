@@ -6,3 +6,4 @@ class Activity(models.Model):
     time_start = models.DateTimeField(auto_now=True)
     duration = models.DurationField(null=True, blank=True)
     activity_status = models.BooleanField(default=True)
+    exp = models.IntegerField(default=0, blank=True)

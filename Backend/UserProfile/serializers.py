@@ -8,12 +8,10 @@ class ProfileSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(source='user.last_name', allow_blank=True,)
     email = serializers.EmailField(source='user.email', allow_blank=True,)
     bio = serializers.CharField(allow_blank=True, required=False)
-    exp = serializers.IntegerField(read_only = True)
-    lvl = serializers.IntegerField(read_only = True)
 
     class Meta:
         model = Profile
-        fields = ('username', 'first_name', 'last_name', 'email', 'bio', 'lvl', 'exp')
+        fields = ('username', 'first_name', 'last_name', 'email', 'bio')
 
 
     def update(self, instance, validated_data):

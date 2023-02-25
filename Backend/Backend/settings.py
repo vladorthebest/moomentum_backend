@@ -37,11 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-=======
     'rest_framework',
     'corsheaders',
->>>>>>> 46338c2 (Setting Cors Backend (Day 1))
+    'Timer'
 ]
 
 MIDDLEWARE = [
